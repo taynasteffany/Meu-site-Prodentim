@@ -189,7 +189,32 @@ window.addEventListener("staticsDone", function() {
 <p style="text-align: center; font-size: 1.1rem; color: #444; margin-top: 10px;">
   Visible results in just a few days. Approved by thousands of happy customers!
 </p>
-            
+ <div style="text-align: center; margin-top: 15px;">
+  <h2 style="font-size: 1.5rem; color: red;">⏰ Offer expires in:</h2>
+  <div id="countdown" style="font-size: 2rem; font-weight: bold; color: #ff4d4d;"></div>
+</div>
+
+<script>
+  // Set countdown for 12 hours and 34 minutes from now
+  const countdownDate = new Date().getTime() + (12 * 60 * 60 + 34 * 60) * 1000;
+
+  const x = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = countdownDate - now;
+
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("countdown").innerHTML = "⛔ Expired!";
+      return;
+    }
+
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("countdown").innerHTML = `${hours}h ${minutes}m ${seconds}s`;
+  }, 1000);
+	  </script>           
       <div class="container-fluid">
          <div class="row dark-green-bg py-2 py-lg-4">
             <div class="container py-2 py-md-0">
